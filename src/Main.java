@@ -2,20 +2,37 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
+
+    public static int random() {
+        return (int) (Math.random() * 325 + 1);
+    }
+
     public static void main(String[] args) {
 
-        int temp = 0;
-        String ips = "192.168.0.105, 145.198.44.105, 255.255.255.0, 256.123.79.105, 192-167-5-133, 19216753249";
+        String[] random_ips = new String[5];
+        random_ips[0] = random() + "." + random() + "." + random() + "." + random();
+        random_ips[1] = random() + "." + random() + "." + random() + "." + random();
+        random_ips[2] = random() + "." + random() + "." + random() + "." + random();
+        random_ips[3] = random() + "." + random() + "." + random() + "." + random();
+        random_ips[4] = random() + "." + random() + "." + random() + "." + random();
 
-        Pattern pattern = Pattern.compile("(\\b(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?\\b)");
-        Matcher matcher = pattern.matcher(ips);
+        Pattern pattern = Pattern.compile("((1?\\d?\\d|2[0-4]\\d|25[0-5])\\.){3}(1?\\d?\\d|2[0-4]\\d|25[0-5])");
 
-        System.out.println("Айпи адреса, которые валидны: ");
+        System.out.println("Айпи адреса: ");
 
-        while (matcher.find()) {
-            temp++;
-            System.out.println(matcher.group());
+        for (int i = 0; i < random_ips.length; i++) {
+            System.out.println(random_ips[i]);
         }
-        System.out.println("Найденных валидных айпи адресов: " + temp);
+
+        System.out.println(" ");
+
+        System.out.println("Валидные айпи адреса: ");
+
+        for (int i = 0; i < random_ips.length; i++) {
+            Matcher matcher = pattern.matcher(random_ips[i]);
+            while (matcher.find()) {
+                System.out.println(matcher.group());
+            }
+        }
     }
 }
